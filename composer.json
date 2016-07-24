@@ -1,0 +1,10 @@
+{
+    "name": "cretueusebiu/laravel-javascript",
+    "license": "MIT",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Eusebiu\\LaravelJavaScript\\": "src/"
+        }
+    }
+}
