@@ -2,7 +2,7 @@
 
 ## Installation
 
-- Run `composer require eusebiu/laravel-javascript`
+- Run `composer require cretueusebiu/laravel-javascript`
 - Add `Eusebiu\LaravelJavaScript\JavaScriptServiceProvider::class` to your providers array in `config/app.php`
 - Add `{{ JavaScript::build() }}` in your view
 
