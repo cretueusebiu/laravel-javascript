@@ -14,7 +14,7 @@ class JavaScriptServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('javascript', function ($app) {
-            return new ScriptVariables;
+            return new ScriptVariables();
         });
 
         $this->app->alias('javascript', ScriptVariables::class);

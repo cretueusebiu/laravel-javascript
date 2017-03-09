@@ -8,16 +8,16 @@ class ScriptVariablesTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddKeyValueVariable()
     {
-        $sv = (new ScriptVariables)->add('foo', 'bar');
+        $sv = (new ScriptVariables())->add('foo', 'bar');
 
         $this->assertEquals('<script>window.config = {"foo":"bar"};</script>', $sv->render()->toHtml());
     }
 
     public function testAddArrayVariable()
     {
-        $sv = (new ScriptVariables)->add([
+        $sv = (new ScriptVariables())->add([
             'key1' => 'foo',
-            'key2' => 'bar'
+            'key2' => 'bar',
         ]);
 
         $this->assertEquals('<script>window.config = {"key1":"foo","key2":"bar"};</script>', $sv->render()->toHtml());
@@ -25,15 +25,15 @@ class ScriptVariablesTest extends \PHPUnit_Framework_TestCase
 
     public function testAddNestedArrayVariable()
     {
-        $sv = (new ScriptVariables)->add([
+        $sv = (new ScriptVariables())->add([
             'data.user' => 'foo',
         ]);
 
         $this->assertEquals('<script>window.config = {"data":{"user":"foo"}};</script>', $sv->render()->toHtml());
     }
 
-    public  function testSetNamespace()
+    public function testSetNamespace()
     {
-        $this->assertEquals('<script>window.custom = [];</script>', (new ScriptVariables)->render('custom')->toHtml());
+        $this->assertEquals('<script>window.custom = [];</script>', (new ScriptVariables())->render('custom')->toHtml());
     }
 }
