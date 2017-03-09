@@ -1,4 +1,9 @@
-# laravel-javascript
+<h1>laravel-javascript</h1>
+
+<a href="https://travis-ci.org/cretueusebiu/laravel-javascript"><img src="https://travis-ci.org/cretueusebiu/laravel-javascript.svg?branch=master" alt="Build Status"></a>
+<a href="https://packagist.org/packages/cretueusebiu/laravel-javascript"><img src="https://poser.pugx.org/cretueusebiu/laravel-javascript/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/cretueusebiu/laravel-javascript"><img src="https://poser.pugx.org/cretueusebiu/laravel-javascript/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/cretueusebiu/laravel-javascript"><img src="https://poser.pugx.org/cretueusebiu/laravel-javascript/license.svg" alt="License"></a>
 
 > Add JavaScript variables from Laravel.
 
