@@ -2,6 +2,7 @@
 
 namespace Eusebiu\JavaScript;
 
+use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\HtmlString;
 
@@ -26,6 +27,8 @@ class ScriptVariables
             foreach ($key as $innerKey => $innerValue) {
                 Arr::set($this->variables, $innerKey, $innerValue);
             }
+        } elseif ($key instanceof Closure) {
+            $this->variables[] = $key;
         } else {
             Arr::set($this->variables, $key, $value);
         }
@@ -42,8 +45,22 @@ class ScriptVariables
      */
     public function render($namespace = 'config')
     {
+        foreach ($this->variables as $key => $variable) {
+            if ($variable instanceof Closure) {
+                $variable = $variable();
+
+                if (is_array($variable)) {
+                    $this->add($variable);
+                }
+            }
+        }
+
+        $variables = array_filter($this->variables, function ($variable) {
+            return !$variable instanceof Closure;
+        });
+
         return new HtmlString(
-            '<script>window.'.$namespace.' = '.json_encode($this->variables).';</script>'
+            '<script>window.'.$namespace.' = '.json_encode($variables).';</script>'
         );
     }
 }

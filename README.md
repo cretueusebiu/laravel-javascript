@@ -76,39 +76,28 @@ To customize the namespace use `JavaScript::render('custom')`.
 
 #### Global Variables
 
-To add global variables like the authenticated user or the csrf token, create a middleware:
+You can register global variables (like the current user or csrf token) in your `AppServiceProvider`:
 
 ```php
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Providers;
 
-use Closure;
+use Illuminate\Support\ServiceProvider;
 use Eusebiu\JavaScript\Facades\ScriptVariables;
 
-class AddScriptVariables
+class AppServiceProvider extends ServiceProvider
 {
-    public function handle($request, Closure $next)
+    public function boot()
     {
-        ScriptVariables::add([
-            'csrfToken' => csrf_token(),
-            'currentUser' => auth()->user(),
-        ]);
-
-        return $next($request);
+        ScriptVariables::add(function () {
+            return [
+                'csrfToken' => csrf_token(),
+                'currentUser' => auth()->user(),
+            ];
+        });
     }
 }
 ```
 
-Then register the middleware:
-
-```php
-// app/Http/Kernel.php
-
-protected $middlewareGroups = [
-    'web' => [
-        ....
-        \App\Http\Middleware\AddScriptVariables::class,
-    ],
-];
-```
+> Note that the variables must be passed via a closure.
