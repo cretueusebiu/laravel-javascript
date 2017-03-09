@@ -1,9 +1,110 @@
 # laravel-javascript
 
+> Add JavaScript variables from Laravel.
+
+```php
+ScriptVariables::add('user', Auth::user());
+```
+
+```javascript
+const user = window.config.user
+```
+
 ## Installation
 
-- Run `composer require cretueusebiu/laravel-javascript`
-- Add `Eusebiu\LaravelJavaScript\JavaScriptServiceProvider::class` to your providers array in `config/app.php`
-- Add `{{ JavaScript::build() }}` in your view
+Install the package via Composer:
 
-> Inspired from [PHP Vars to JavaScript](https://github.com/laracasts/PHP-Vars-To-Js-Transformer).
+```php
+composer require cretueusebiu/laravel-javascript
+```
+
+Next, you need to register the service provider and facade:
+
+```php
+// config/app.php
+
+'providers' => [
+    ...
+    Eusebiu\JavaScript\JavaScriptServiceProvider::class,
+],
+
+'aliases' => [
+    ...
+    'ScriptVariables' => Eusebiu\JavaScript\Facades\ScriptVariables::class,
+],
+```
+
+## Usage
+
+In your controller:
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Eusebiu\JavaScript\Facades\ScriptVariables;
+
+class HomeController extends Controller
+{
+    public function home()
+    {
+        ScriptVariables::add('key', 'value');
+        ScriptVariables::add('data.user', User::first());
+    }
+}
+```
+
+Next, in your blade view add:
+
+```php
+{{ JavaScript::render() }}
+```
+
+Then in your JavaScript you can use:
+
+```javascript
+const key = window.config.key
+const user = window.config.data.user
+```
+
+To customize the namespace use `JavaScript::render('custom')`.
+
+#### Global Variables
+
+To add global variables like the authenticated user or the csrf token, create a middleware:
+
+```php
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Eusebiu\JavaScript\Facades\ScriptVariables;
+
+class AddScriptVariables
+{
+    public function handle($request, Closure $next)
+    {
+        ScriptVariables::add([
+            'csrfToken' => csrf_token(),
+            'currentUser' => auth()->user(),
+        ]);
+
+        return $next($request);
+    }
+}
+```
+
+Then register the middleware:
+
+```php
+// app/Http/Kernel.php
+
+protected $middlewareGroups = [
+    'web' => [
+        ....
+        \App\Http\Middleware\AddScriptVariables::class,
+    ],
+];
+```

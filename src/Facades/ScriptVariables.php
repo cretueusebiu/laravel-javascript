@@ -1,10 +1,10 @@
 <?php
 
-namespace Eusebiu\LaravelJavaScript\Facades;
+namespace Eusebiu\JavaScript\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class JavaScript extends Facade
+class ScriptVariables extends Facade
 {
     /**
      * The name of the binding in the IoC container.

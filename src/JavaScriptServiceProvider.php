@@ -1,6 +1,6 @@
 <?php
 
-namespace Eusebiu\LaravelJavaScript;
+namespace Eusebiu\JavaScript;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -14,11 +14,9 @@ class JavaScriptServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('javascript', function ($app) {
-            $namespace = 'config';
-
-            return new JavaScriptTransformer($namespace);
+            return new ScriptVariables;
         });
 
-        $this->app->alias('javascript', JavaScriptTransformerInterface::class);
+        $this->app->alias('javascript', ScriptVariables::class);
     }
 }
