@@ -15,8 +15,9 @@ class ScriptVariables
     /**
      * Add a variable.
      *
-     * @param  array|string|\Closure $key
-     * @param  mixed $value
+     * @param array|string|\Closure $key
+     * @param mixed                 $value
+     *
      * @return $this
      */
     public function add($key, $value = null)
@@ -35,7 +36,8 @@ class ScriptVariables
     /**
      * Render as a HTML string.
      *
-     * @param  string $namespace
+     * @param string $namespace
+     *
      * @return \Illuminate\Support\HtmlString
      */
     public function render($namespace = 'config')
