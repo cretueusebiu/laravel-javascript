@@ -18,7 +18,7 @@ const user = window.config.user
 
 Install the package via Composer:
 
-```php
+```bash
 composer require cretueusebiu/laravel-javascript
 ```
 
