@@ -62,7 +62,7 @@ class HomeController extends Controller
 Next, in your blade view add:
 
 ```php
-{{ JavaScript::render() }}
+{{ ScriptVariables::render() }}
 ```
 
 Then in your JavaScript you can use:
@@ -72,7 +72,7 @@ const key = window.config.key
 const user = window.config.data.user
 ```
 
-To customize the namespace use `JavaScript::render('custom')`.
+To customize the namespace use `ScriptVariables::render('custom')`.
 
 #### Global Variables
 
